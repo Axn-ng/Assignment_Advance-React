@@ -1,0 +1,207 @@
+/* ── Step 5: Base styles (from slide) ───────────────── */
+body {
+  background: #f0f4f8;
+}
+
+.todo-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 500px;
+  margin: 40px auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #0077cc;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+/* ── TaskItem (Step 2) ───────────────────────────────── */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eef0f4;
+  transition: opacity 0.2s;
+}
+
+.task-item.completed {
+  opacity: 0.65;
+}
+
+.task-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.task-item.completed span {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+/* Challenge: Edit input inside task */
+.task-edit-input {
+  flex: 1;
+  border: 1.5px solid #0077cc;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+
+.edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #bbc;
+  padding: 3px 5px;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+
+.edit-btn:hover {
+  color: #0077cc;
+}
+
+/* ── TaskInput (Step 3) ──────────────────────────────── */
+.task-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.task-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid #dde3ee;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #1a2a3a;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.task-input:focus {
+  border-color: #0077cc;
+}
+
+.add-btn {
+  padding: 10px 18px;
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-btn:disabled {
+  background: #c5d8ec;
+  cursor: not-allowed;
+}
+
+.add-btn:not(:disabled):hover {
+  background: #005fa3;
+}
+
+/* ── Challenge: Stats row (task count) ───────────────── */
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #889;
+  margin-bottom: 10px;
+}
+
+/* ── Controls row ────────────────────────────────────── */
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── Challenge: Select All ───────────────────────────── */
+.select-all-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #556;
+  cursor: pointer;
+}
+
+/* ── Filter bar (Step 4) ─────────────────────────────── */
+.filter-bar {
+  display: flex;
+  gap: 6px;
+}
+
+.filter-btn {
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1.5px solid #dde3ee;
+  background: white;
+  color: #889;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filter-btn.active-filter {
+  border-color: #0077cc;
+  background: #e8f3fc;
+  color: #0077cc;
+  font-weight: 600;
+}
+
+/* ── Task list ───────────────────────────────────────── */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 28px 0;
+  color: #bbc;
+  font-size: 14px;
+}
+
+/* ── Clear Completed ─────────────────────────────────── */
+.clear-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  background: #fff;
+  border: 1.5px solid #f5c5c5;
+  border-radius: 8px;
+  color: #e05;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.clear-btn:hover {
+  background: #fff5f5;
+}
