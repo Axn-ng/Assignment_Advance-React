@@ -79,7 +79,8 @@ function App() {
       </div>
 
       <div className="stats">
-        แสดง {displayedCountries.length} ประเทศ | ❤️ ชื่นชอบ: {favorites.length} แห่ง
+        <span className="stat-badge">🌍 แสดง {displayedCountries.length} ประเทศ</span>
+        <span className="stat-badge">❤️ ชื่นชอบ: {favorites.length} แห่ง</span>
       </div>
 
       {error && <p className="error-msg">❌ {error}</p>}

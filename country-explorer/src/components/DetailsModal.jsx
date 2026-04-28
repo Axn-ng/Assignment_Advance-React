@@ -9,11 +9,17 @@ export default function DetailsModal({ country, onClose }) {
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="close-modal" onClick={onClose}>✖</button>
         <img src={country.flags.svg} alt="Flag" className="modal-img" />
+        
         <h2>{country.name.common}</h2>
-        <p><strong>ชื่ออย่างเป็นทางการ:</strong> {country.name.official}</p>
-        <p><strong>สกุลเงิน:</strong> {currencies}</p>
-        <p><strong>ภาษา:</strong> {languages}</p>
-        <p><strong>Timezones:</strong> {country.timezones.join(', ')}</p>
+        <p style={{ color: '#64748b', marginTop: 0 }}>{country.name.official}</p>
+        
+        <div className="modal-info-grid">
+          <p><strong>สกุลเงิน</strong> <span>{currencies}</span></p>
+          <p><strong>ภาษา</strong> <span>{languages}</span></p>
+          <p><strong>เขตเวลา</strong> <span>{country.timezones[0]}</span></p>
+          <p><strong>ภูมิภาค</strong> <span>{country.region}</span></p>
+        </div>
+
         <a 
           href={country.maps.googleMaps} 
           target="_blank" 
