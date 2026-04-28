@@ -1,0 +1,53 @@
+/* รีเซ็ตค่าเริ่มต้นเล็กน้อย */
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+.app-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+header h1 { text-align: center; color: #1a202c; }
+
+/* แถบเครื่องมือควบคุม */
+.controls { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; align-items: center; }
+.search-bar { display: flex; align-items: center; position: relative; flex: 1; min-width: 250px; }
+.search-bar input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e0; font-size: 1rem; }
+.clear-btn { position: absolute; right: 10px; background: none; border: none; cursor: pointer; font-size: 1.2rem; }
+select { padding: 12px; border-radius: 8px; border: 1px solid #cbd5e0; font-size: 1rem; cursor: pointer; background-color: white; }
+
+.stats { font-weight: bold; color: #4a5568; margin-bottom: 20px; }
+.error-msg { color: #e53e3e; font-weight: bold; text-align: center; padding: 20px; background: #fff5f5; border-radius: 8px; }
+
+/* Grid ระบบการ์ด */
+.countries-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
+
+/* ประเทศ (CountryCard) */
+.country-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+.country-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+.country-card img { width: 100%; height: 160px; object-fit: cover; border-bottom: 1px solid #edf2f7; }
+.card-content { padding: 20px; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.card-header h3 { margin: 0; font-size: 1.2rem; color: #2d3748; }
+.fav-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; transition: transform 0.1s; }
+.fav-btn:active { transform: scale(0.8); }
+.card-content p { margin: 5px 0; color: #4a5568; font-size: 0.95rem; }
+
+/* Modal รายละเอียด */
+.modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.modal-content { background: white; padding: 30px; border-radius: 16px; width: 100%; max-width: 500px; position: relative; max-height: 90vh; overflow-y: auto; }
+.modal-img { width: 100%; border-radius: 8px; margin-bottom: 20px; border: 1px solid #edf2f7; }
+.close-modal { position: absolute; top: 15px; right: 15px; background: #edf2f7; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.close-modal:hover { background: #e2e8f0; }
+.modal-content h2 { margin-top: 0; color: #2d3748; }
+.modal-content p { margin: 10px 0; color: #4a5568; line-height: 1.5; }
+.map-link { display: inline-block; margin-top: 20px; color: white; background-color: #3182ce; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: background 0.2s; }
+.map-link:hover { background-color: #2b6cb0; }
+
+/* Skeleton Loading Effect */
+.skeleton-card { background: white; border-radius: 12px; padding-bottom: 20px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.skeleton-img { width: 100%; height: 160px; background: #e2e8f0; }
+.skeleton-text { background: #e2e8f0; height: 16px; margin: 20px 20px 10px 20px; border-radius: 4px; }
+.pulse { animation: pulse 1.5s infinite ease-in-out; }
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
