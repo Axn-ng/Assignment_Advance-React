@@ -1,22 +1,31 @@
 import { useState, useEffect } from 'react';
 import { useExpenses } from '../context/ExpenseContext';
 
+const today = () => new Date().toISOString().slice(0, 10);
+
 function AddExpenseForm({ editingExpense, onCancelEdit }) {
   const { addExpense, editExpense, categories } = useExpenses();
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState(categories[0]);
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const [date, setDate] = useState(today);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (editingExpense) {
-      setName(editingExpense.name);
-      setAmount(editingExpense.amount);
-      setCategory(editingExpense.category);
-      setDate(editingExpense.date);
-    }
+    if (!editingExpense) return;
+    setName(editingExpense.name);
+    setAmount(String(editingExpense.amount));
+    setCategory(editingExpense.category);
+    setDate(editingExpense.date);
   }, [editingExpense]);
+
+  function reset() {
+    setName('');
+    setAmount('');
+    setCategory(categories[0]);
+    setDate(today());
+    setError('');
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -24,23 +33,13 @@ function AddExpenseForm({ editingExpense, onCancelEdit }) {
     if (!amount || parseFloat(amount) <= 0) { setError('Enter a valid amount'); return; }
 
     if (editingExpense) {
-      editExpense({
-        ...editingExpense,
-        name: name.trim(),
-        amount: parseFloat(amount),
-        category,
-        date,
-      });
+      editExpense({ ...editingExpense, name: name.trim(), amount: parseFloat(amount), category, date });
       onCancelEdit();
-    } else {
-      addExpense(name.trim(), amount, category, date);
+      return;
     }
 
-    setName('');
-    setAmount('');
-    setCategory(categories[0]);
-    setDate(new Date().toISOString().slice(0, 10));
-    setError('');
+    addExpense(name.trim(), amount, category, date);
+    reset();
   }
 
   return (

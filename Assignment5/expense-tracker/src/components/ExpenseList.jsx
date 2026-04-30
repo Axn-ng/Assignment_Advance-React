@@ -1,15 +1,7 @@
 import { useState } from 'react';
 import { useExpenses } from '../context/ExpenseContext';
 import AddExpenseForm from './AddExpenseForm';
-
-const COLORS = {
-  Food: '#ff9500',
-  Transport: '#0077cc',
-  Entertainment: '#9c27b0',
-  Shopping: '#e91e63',
-  Health: '#10b981',
-  Other: '#607d8b',
-};
+import { CATEGORY_COLORS } from '../constants';
 
 function ExpenseList() {
   const { filteredExpenses, deleteExpense, filter, setFilter, categories, exportCSV } = useExpenses();
@@ -46,29 +38,14 @@ function ExpenseList() {
       ) : (
         filteredExpenses.map(exp => (
           <div key={exp.id} className="expense-item">
-            <span
-              className="cat-dot"
-              style={{ background: COLORS[exp.category] || '#607d8b' }}
-            />
+            <span className="cat-dot" style={{ background: CATEGORY_COLORS[exp.category] }} />
             <div className="expense-info">
               <b>{exp.name}</b>
               <span className="expense-meta">{exp.category} · {exp.date}</span>
             </div>
             <span className="expense-amount">${exp.amount.toFixed(2)}</span>
-            <button
-              className="edit-btn"
-              onClick={() => setEditingExpense(exp)}
-              title="Edit"
-            >
-              ✎
-            </button>
-            <button
-              className="delete-btn"
-              onClick={() => deleteExpense(exp.id)}
-              title="Delete"
-            >
-              ✕
-            </button>
+            <button className="edit-btn" onClick={() => setEditingExpense(exp)} title="Edit">✎</button>
+            <button className="delete-btn" onClick={() => deleteExpense(exp.id)} title="Delete">✕</button>
           </div>
         ))
       )}

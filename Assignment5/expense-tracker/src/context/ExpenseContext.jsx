@@ -8,8 +8,6 @@ function expenseReducer(state, action) {
   switch (action.type) {
     case 'ADD':
       return { ...state, expenses: [...state.expenses, action.payload] };
-    case 'LOAD':
-      return { ...state, expenses: action.payload };
     case 'DELETE':
       return { ...state, expenses: state.expenses.filter(e => e.id !== action.payload) };
     case 'FILTER':
@@ -23,17 +21,20 @@ function expenseReducer(state, action) {
   }
 }
 
-const initialState = { expenses: [], filter: 'All', budget: 0 };
+function loadInitialState() {
+  try {
+    return {
+      expenses: JSON.parse(localStorage.getItem('expenses') || '[]'),
+      filter: 'All',
+      budget: parseFloat(localStorage.getItem('budget') || '0'),
+    };
+  } catch {
+    return { expenses: [], filter: 'All', budget: 0 };
+  }
+}
 
 export function ExpenseProvider({ children }) {
-  const [state, dispatch] = useReducer(expenseReducer, initialState);
-
-  useEffect(() => {
-    const s = localStorage.getItem('expenses');
-    if (s) dispatch({ type: 'LOAD', payload: JSON.parse(s) });
-    const b = localStorage.getItem('budget');
-    if (b) dispatch({ type: 'SET_BUDGET', payload: parseFloat(b) });
-  }, []);
+  const [state, dispatch] = useReducer(expenseReducer, undefined, loadInitialState);
 
   useEffect(() => {
     localStorage.setItem('expenses', JSON.stringify(state.expenses));
@@ -47,15 +48,12 @@ export function ExpenseProvider({ children }) {
 
   const currentMonth = new Date().toISOString().slice(0, 7);
   const monthlyTotal = state.expenses
-    .filter(e => e.date && e.date.startsWith(currentMonth))
+    .filter(e => e.date?.startsWith(currentMonth))
     .reduce((sum, e) => sum + e.amount, 0);
 
-  const filteredExpenses =
-    state.filter === 'All'
-      ? [...state.expenses].sort((a, b) => b.id - a.id)
-      : [...state.expenses]
-          .filter(e => e.category === state.filter)
-          .sort((a, b) => b.id - a.id);
+  const filteredExpenses = state.expenses
+    .filter(e => state.filter === 'All' || e.category === state.filter)
+    .sort((a, b) => b.id - a.id);
 
   function addExpense(name, amount, category, date) {
     dispatch({
@@ -87,16 +85,14 @@ export function ExpenseProvider({ children }) {
   }
 
   function exportCSV() {
+    const wrap = val => `"${String(val).replace(/"/g, '""')}"`;
     const rows = [
       ['Name', 'Amount', 'Category', 'Date'],
-      ...state.expenses.map(e => [e.name, e.amount, e.category, e.date]),
+      ...state.expenses.map(e => [wrap(e.name), e.amount, wrap(e.category), wrap(e.date)]),
     ];
     const csv = rows.map(r => r.join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'expenses.csv';
+    const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    const a = Object.assign(document.createElement('a'), { href: url, download: 'expenses.csv' });
     a.click();
     URL.revokeObjectURL(url);
   }

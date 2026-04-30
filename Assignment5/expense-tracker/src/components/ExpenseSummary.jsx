@@ -1,21 +1,11 @@
 import { useExpenses } from '../context/ExpenseContext';
-
-const COLORS = {
-  Food: '#ff9500',
-  Transport: '#0077cc',
-  Entertainment: '#9c27b0',
-  Shopping: '#e91e63',
-  Health: '#10b981',
-  Other: '#607d8b',
-};
+import { CATEGORY_COLORS } from '../constants';
 
 function ExpenseSummary() {
   const { expenses, totalAmount, categories, monthlyTotal, budget, setBudget } = useExpenses();
 
   const byCategory = categories.reduce((acc, cat) => {
-    const total = expenses
-      .filter(e => e.category === cat)
-      .reduce((s, e) => s + e.amount, 0);
+    const total = expenses.filter(e => e.category === cat).reduce((s, e) => s + e.amount, 0);
     if (total > 0) acc[cat] = total;
     return acc;
   }, {});
@@ -46,18 +36,13 @@ function ExpenseSummary() {
             <div className="budget-bar-wrap">
               <div
                 className="budget-bar-fill"
-                style={{
-                  width: `${budgetPercent}%`,
-                  background: isOverBudget ? '#ef4444' : '#047857',
-                }}
+                style={{ width: `${budgetPercent}%`, background: isOverBudget ? '#e53e3e' : '#111' }}
               />
             </div>
-            <p className="budget-text" style={{ color: isOverBudget ? '#ef4444' : '#666' }}>
-              ${monthlyTotal.toFixed(2)} / ${Number(budget).toFixed(2)} ({budgetPercent.toFixed(0)}% this month)
+            <p className="budget-text" style={{ color: isOverBudget ? '#e53e3e' : '#999' }}>
+              ${monthlyTotal.toFixed(2)} / ${budget.toFixed(2)} ({budgetPercent.toFixed(0)}% this month)
             </p>
-            {isOverBudget && (
-              <p className="over-budget-warning">⚠ Over budget this month!</p>
-            )}
+            {isOverBudget && <p className="over-budget-warning">Over budget this month</p>}
           </>
         )}
       </div>
@@ -71,10 +56,7 @@ function ExpenseSummary() {
               <div className="chart-bar-wrap">
                 <div
                   className="chart-bar"
-                  style={{
-                    width: `${(amt / maxCategoryAmount) * 100}%`,
-                    background: COLORS[cat] || '#607d8b',
-                  }}
+                  style={{ width: `${(amt / maxCategoryAmount) * 100}%`, background: CATEGORY_COLORS[cat] }}
                 />
               </div>
               <span className="chart-amount">${amt.toFixed(2)}</span>

@@ -11,7 +11,6 @@ function App() {
         <header>
           <h1>Expense Tracker</h1>
         </header>
-
         <div className="main-layout">
           <aside>
             <ExpenseSummary />
