@@ -1,0 +1,414 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* ── Header ── */
+header {
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: #111;
+}
+
+/* ── Layout ── */
+.main-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ── Summary ── */
+.summary {
+  position: sticky;
+  top: 24px;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.total-amount {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.5px;
+  margin-bottom: 2px;
+}
+
+.transaction-count {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+/* ── Budget ── */
+.budget-section {
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+  margin-bottom: 16px;
+}
+
+.budget-section label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #999;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.budget-input {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: #111;
+  background: #fff;
+}
+
+.budget-input:focus {
+  outline: none;
+  border-color: #111;
+}
+
+.budget-bar-wrap {
+  background: #f0f0f0;
+  border-radius: 2px;
+  height: 3px;
+  margin-bottom: 6px;
+}
+
+.budget-bar-fill {
+  height: 3px;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.budget-text {
+  font-size: 11px;
+  color: #999;
+}
+
+.over-budget-warning {
+  font-size: 11px;
+  color: #e53e3e;
+  margin-top: 4px;
+}
+
+/* ── Bar Chart ── */
+.chart-section {
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.chart-section h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #999;
+  margin-bottom: 12px;
+}
+
+.chart-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.chart-label {
+  font-size: 11px;
+  color: #666;
+  width: 76px;
+  flex-shrink: 0;
+}
+
+.chart-bar-wrap {
+  flex: 1;
+  background: #f4f4f4;
+  border-radius: 2px;
+  height: 4px;
+}
+
+.chart-bar {
+  height: 4px;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  min-width: 3px;
+}
+
+.chart-amount {
+  font-size: 11px;
+  color: #666;
+  width: 52px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── Add Form ── */
+.add-form {
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.add-form h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 14px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.form-grid input,
+.form-grid select {
+  padding: 7px 10px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #111;
+  background: #fff;
+  width: 100%;
+}
+
+.form-grid input:focus,
+.form-grid select:focus {
+  outline: none;
+  border-color: #111;
+}
+
+.form-grid input::placeholder {
+  color: #bbb;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.form-actions button {
+  padding: 7px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: opacity 0.15s;
+  border: 1px solid transparent;
+}
+
+.form-actions button:hover {
+  opacity: 0.75;
+}
+
+.form-actions button[type='submit'] {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.form-actions button[type='button'] {
+  background: #fff;
+  color: #666;
+  border-color: #e8e8e8;
+}
+
+.form-error {
+  font-size: 12px;
+  color: #e53e3e;
+  margin-bottom: 10px;
+}
+
+/* ── Expense List ── */
+.expense-list-section {
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.list-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111;
+}
+
+.export-btn {
+  padding: 5px 12px;
+  background: #fff;
+  color: #666;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.export-btn:hover {
+  border-color: #111;
+  color: #111;
+}
+
+/* ── Tabs ── */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.tab {
+  padding: 3px 12px;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  color: #666;
+  transition: all 0.15s;
+}
+
+.tab:hover {
+  color: #111;
+  border-color: #ccc;
+}
+
+.tab.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/* ── Expense Item ── */
+.expense-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.expense-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.cat-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.expense-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.expense-info b {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expense-meta {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.expense-amount {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111;
+  flex-shrink: 0;
+}
+
+.edit-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 13px;
+  color: #ccc;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+
+.edit-btn:hover {
+  color: #111;
+}
+
+.delete-btn:hover {
+  color: #e53e3e;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #bbb;
+  padding: 32px 0;
+  font-size: 13px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .app {
+    padding: 24px 16px;
+  }
+
+  .main-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .summary {
+    position: static;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
