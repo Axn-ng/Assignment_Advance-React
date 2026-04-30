@@ -1,0 +1,23 @@
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.mainLayout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding: 24px 16px;
+  }
+
+  .mainLayout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
