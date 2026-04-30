@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 *)",
+      "Bash(python \"/c/Users/Acer/Downloads/read_pdf.py\")",
+      "Bash(py -V)",
+      "Bash(node *)",
+      "Bash(cd /tmp)",
+      "Bash(npm install *)",
+      "Bash(cat)",
+      "Bash(mkdir -p \"/c/Users/Acer/Desktop/Assignment_Advance-React/Assignment5/expense-tracker/src/context\")",
+      "Bash(mkdir -p \"/c/Users/Acer/Desktop/Assignment_Advance-React/Assignment5/expense-tracker/src/components\")",
+      "Bash(npm run *)"
+    ]
+  }
+}
